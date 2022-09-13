@@ -1,6 +1,8 @@
 package main;
+import exception.InvalidPathException;
 import model.Product;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,17 +69,25 @@ public class Example04 {
             System.out.println("Key: " + key + " " + "Value: " + product);
         }
     }
-    public static List<String> readFileData(String path) {
-        String filePath = path;
+    public static List<String> readFileData(String filePath) {
         List<String> stringList = new ArrayList<>();
+        File file = new File(filePath);
         try {
-            BufferedReader lineReader = new BufferedReader(new FileReader(filePath));
-            String lineText = null;
-            while ((lineText = lineReader.readLine()) != null) {
-                stringList.add(lineText);
+            if(file.exists()){
+                BufferedReader lineReader = new BufferedReader(new FileReader(filePath));
+                if(lineReader != null){
+                    String lineText;
+                    while ((lineText = lineReader.readLine()) != null) {
+                        stringList.add(lineText);
+                    }
+                    lineReader.close();
+                }else {
+                    throw new NullPointerException("Null Pointer Exception");
+                }
+            }else {
+                throw new InvalidPathException("The provided path is invalid");
             }
-            lineReader.close();
-        } catch (IOException ex) {
+        } catch (IOException | InvalidPathException ex) {
             System.err.println(ex);
         }
         return stringList;

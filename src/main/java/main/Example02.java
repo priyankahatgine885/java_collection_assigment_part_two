@@ -1,9 +1,10 @@
 package main;
 
+import exception.InvalidPathException;
 import model.Software;
 import model.SoftwareStatus;
-
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ Because Ubuntu 12.04 is an out-of-date version (the latest version is 18.04), an
  */
 public class Example02 {
     public static void main(String[] args) {
-        List<String> stringList = readFileData("./src/main/java/file/SoftwareData");
+        List<String> stringList = readFileData("./src/main/java/file");
         List<Software> softWaresList = prepareData(stringList);
         Map<String, SoftwareStatus> softwareMap = getLatestSoftwareTypeNameVersionMap(softWaresList);
         printSoftwareMap(softwareMap);
@@ -43,17 +44,25 @@ public class Example02 {
         }
     }
 
-    public static List<String> readFileData(String path) {
-        String filePath = path;
+    public static List<String> readFileData(String filePath) {
         List<String> stringList = new ArrayList<>();
+        File file = new File(filePath);
         try {
-            BufferedReader lineReader = new BufferedReader(new FileReader(filePath));
-            String lineText = null;
-            while ((lineText = lineReader.readLine()) != null) {
-                stringList.add(lineText);
+            if(file.exists()){
+                BufferedReader lineReader = new BufferedReader(new FileReader(filePath));
+                if(lineReader != null){
+                    String lineText;
+                    while ((lineText = lineReader.readLine()) != null) {
+                        stringList.add(lineText);
+                    }
+                    lineReader.close();
+                }else {
+                    throw new NullPointerException("Null Pointer Exception");
+                }
+            }else {
+                throw new InvalidPathException("The provided path is invalid");
             }
-            lineReader.close();
-        } catch (IOException ex) {
+        } catch (IOException | InvalidPathException ex) {
             System.err.println(ex);
         }
         return stringList;
