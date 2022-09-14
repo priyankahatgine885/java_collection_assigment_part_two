@@ -1,10 +1,7 @@
 package main;
-import exception.InvalidPathException;
-import model.Product;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+
+import model.Student;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,86 +9,55 @@ import java.util.Map;
 
 public class Example04 {
     public static void main(String[] args) {
-        List<String> stringList = readFileData("./src/main/java/file/InputData.txt");
-        List<Product> productList = prepareData(stringList);
-        Map<String, String> employeeMap = getLatestLibraryVersionMap(productList);
-        System.out.println("Latest library Version is : ");
-        printProductMap(employeeMap);
-        System.out.println("-----------------------------");
-        List<Product> outDatedLibraryProducts = getOutdatedLibraryProducts(productList, employeeMap);
-        System.out.println("OutDated library Version is : ");
-        for (Product productName : outDatedLibraryProducts) {
-            System.out.println(productName);
-        }
-    }
-    private static List<Product> prepareData(List<String> stringList) {
-        List<Product> products = new ArrayList<>();
-        for (String str : stringList) {
-            if (!str.isEmpty()) {
-                String[] columns = str.split(",");
-                Product product = new Product(columns[0], columns[1], columns[2]);
-                products.add(product);
-            }
-        }
-        return products;
-    }
-    private static Map<String, String> getLatestLibraryVersionMap(Iterable<Product> products) {
-        Map<String, String> productMap = new HashMap<>();
-        for (Product product : products) {
-            String library = product.getLibraryName();
-            String currentVersion = product.getVersion();
-            if (productMap.containsKey(library)) {
-                String latestVersion = productMap.get(library);
-                if (latestVersion.compareTo(currentVersion) > 0) {
-                    currentVersion = latestVersion;
-                }
-            }
-            productMap.put(library, currentVersion);
-        }
-        return productMap;
-    }
-    private static List<Product> getOutdatedLibraryProducts(Iterable<Product> products, Map<String, String> latestLibraryVersionMap) {
-        List<Product> list = new ArrayList<>();
-        for (Product product : products) {
-            String library = product.getLibraryName();
-            String currentVersion = product.getVersion();
-            String latestVersion = latestLibraryVersionMap.get(library);
-            if (currentVersion.compareTo(latestVersion) < 0) {
-                list.add(product);
-            }
-        }
-        return list;
-    }
-    public static void printProductMap(Map<String, String> productMap) {
-        for (Map.Entry<String, String> entry : productMap.entrySet()) {
-            String key = entry.getKey();
-            String product = entry.getValue();
-            System.out.println("Key: " + key + " " + "Value: " + product);
-        }
-    }
-    public static List<String> readFileData(String filePath) {
-        List<String> stringList = new ArrayList<>();
-        File file = new File(filePath);
-        try {
-            if(file.exists()){
-                BufferedReader lineReader = new BufferedReader(new FileReader(filePath));
-                if(lineReader != null){
-                    String lineText;
-                    while ((lineText = lineReader.readLine()) != null) {
-                        stringList.add(lineText);
-                    }
-                    lineReader.close();
-                }else {
-                    throw new NullPointerException("Null Pointer Exception");
-                }
-            }else {
-                throw new InvalidPathException("The provided path is invalid");
-            }
-        } catch (IOException | InvalidPathException ex) {
-            System.err.println(ex);
-        }
-        return stringList;
-
+        String[] input = {
+                "22, Data Structures, 45",
+                "23, English, 52",
+                "22, English, 51",
+                "26, Data Structures, 72",
+                "23, Data Structures, 61",
+                "24, English, 81"
+        };
+        Iterable<Student> students = prepareData(input);
+        Map<Integer, Integer> studentMap = processData(students);
+        printStudentMap(studentMap);
     }
 
+    private static Iterable<Student> prepareData(String[] input) {
+        List<Student> students = new ArrayList<>();
+        for (String str : input) {
+            String[] arrayList = str.split(",");
+            Student student = new Student(Integer.parseInt(arrayList[0]), arrayList[1], Integer.parseInt(arrayList[2].trim()));
+            students.add(student);
+        }
+        return students;
+    }
+
+    private static Map<Integer, Integer> processData(Iterable<Student> students) {
+        Map<Integer, Integer> studentMap = new HashMap<>();
+        int lowestId = Integer.MAX_VALUE;
+        int averageMark = 0;
+        int sum = 0;
+        int count = 0;
+        for (Student student : students) {
+            int id = student.getId();
+            if (id <= lowestId) {
+                lowestId = id;
+                if (id == lowestId) {
+                    sum += student.getMark();
+                    ++count;
+                }
+            }
+        }
+        averageMark = sum / count;
+        studentMap.put(lowestId, averageMark);
+        return studentMap;
+    }
+
+    public static void printStudentMap(Map<Integer, Integer> studentMap) {
+        for (Map.Entry<Integer, Integer> entry : studentMap.entrySet()) {
+            Integer key = entry.getKey();
+            Integer students = entry.getValue();
+            System.out.println("Key: " + key + " " + "Value: " + students);
+        }
+    }
 }
