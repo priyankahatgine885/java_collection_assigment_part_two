@@ -1,11 +1,8 @@
 package main;
 
-import exception.InvalidPathException;
 import model.Product;
+import utils.FileHandling;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +11,12 @@ import java.util.Map;
 
 public class Example03 {
     public static void main(String[] args) {
-        List<String> stringList = readFileData("./src/main/java/file/InputData.txt");
+        List<String> stringList;
+        try {
+            stringList = FileHandling.readFileData("/data/InputData.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         List<Product> productList = prepareData(stringList);
         Map<String, String> employeeMap = getLatestLibraryVersionMap(productList);
         System.out.println("Latest library Version is : ");
@@ -75,30 +77,4 @@ public class Example03 {
             System.out.println("Key: " + key + " " + "Value: " + product);
         }
     }
-
-    public static List<String> readFileData(String filePath) {
-        List<String> stringList = new ArrayList<>();
-        File file = new File(filePath);
-        try {
-            if (file.exists()) {
-                BufferedReader lineReader = new BufferedReader(new FileReader(filePath));
-                if (lineReader != null) {
-                    String lineText;
-                    while ((lineText = lineReader.readLine()) != null) {
-                        stringList.add(lineText);
-                    }
-                    lineReader.close();
-                } else {
-                    throw new NullPointerException("Null Pointer Exception");
-                }
-            } else {
-                throw new InvalidPathException("The provided path is invalid");
-            }
-        } catch (IOException | InvalidPathException ex) {
-            System.err.println(ex);
-        }
-        return stringList;
-
-    }
-
 }

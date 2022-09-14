@@ -1,7 +1,9 @@
 package main;
 
 import model.Candidate;
+import utils.FileHandling;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,24 +11,21 @@ import java.util.Map;
 
 public class Example06 {
     public static void main(String[] args) {
-        String[] input = {
-                "22, Ravi Pawar, Aundh, 1603",
-                "23, Suvarna Kale, Baner, 803",
-                "27, Vinod Chavan, Aundh, 809",
-                "29, Vasant Mahajan, Aundh, 617",
-                "32, Aarti Patil, Baner, 351",
-                "34, Swaran Bijur, Baner, 352"
-
-        };
-        List<Candidate> candidateList = prepareList(input);
+        List<String> stringList = null;
+        try {
+            stringList = FileHandling.readFileData("/data/CandidateData.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        List<Candidate> candidateList = prepareList(stringList);
         Map<String, List<Candidate>> candidateMap = processData(candidateList);
         Map<String, Float> stringFloatMap = getMaximumVote(candidateMap);
         printEmployeeMap(stringFloatMap);
     }
 
-    public static List<Candidate> prepareList(String[] input) {
+    public static List<Candidate> prepareList(List<String> stringList) {
         List<Candidate> list = new ArrayList<>();
-        for (String str : input) {
+        for (String str : stringList) {
             String[] arrayList = str.split(",", 4);
             Candidate candidate = new Candidate(Integer.parseInt(arrayList[0]), arrayList[1], arrayList[2], Integer.parseInt(arrayList[3].trim()));
             list.add(candidate);

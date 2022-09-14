@@ -1,7 +1,9 @@
 package main;
 
 import model.Student;
+import utils.FileHandling;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,43 +11,42 @@ import java.util.Map;
 
 public class Example04 {
     public static void main(String[] args) {
-        String[] input = {
-                "22, Data Structures, 45",
-                "23, English, 52",
-                "22, English, 51",
-                "26, Data Structures, 72",
-                "23, Data Structures, 61",
-                "24, English, 81"
-        };
-        Iterable<Student> students = prepareData(input);
+        List<String> stringList;
+        try {
+            stringList = FileHandling.readFileData("/data/StudentData.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Iterable<Student> students = prepareData(stringList);
         Map<Integer, Integer> studentMap = processData(students);
         printStudentMap(studentMap);
     }
 
-    private static Iterable<Student> prepareData(String[] input) {
+    private static Iterable<Student> prepareData(List<String> stringList) {
         List<Student> students = new ArrayList<>();
-        for (String str : input) {
-            String[] arrayList = str.split(",");
-            Student student = new Student(Integer.parseInt(arrayList[0]), arrayList[1], Integer.parseInt(arrayList[2].trim()));
-            students.add(student);
+        for (String str : stringList) {
+            if (!str.isEmpty()) {
+                String[] columns = str.split(",");
+                Student student = new Student(Integer.parseInt(columns[0]), columns[1], Integer.parseInt(columns[2].trim()));
+                students.add(student);
+            }
         }
         return students;
     }
 
+
     private static Map<Integer, Integer> processData(Iterable<Student> students) {
         Map<Integer, Integer> studentMap = new HashMap<>();
         int lowestId = Integer.MAX_VALUE;
-        int averageMark = 0;
+        int averageMark;
         int sum = 0;
         int count = 0;
         for (Student student : students) {
             int id = student.getId();
             if (id <= lowestId) {
                 lowestId = id;
-                if (id == lowestId) {
-                    sum += student.getMark();
-                    ++count;
-                }
+                sum += student.getMark();
+                ++count;
             }
         }
         averageMark = sum / count;

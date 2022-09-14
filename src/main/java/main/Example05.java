@@ -1,7 +1,9 @@
 package main;
 
 import model.Employee;
+import utils.FileHandling;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,15 +11,13 @@ import java.util.Map;
 
 public class Example05 {
     public static void main(String[] args) {
-        String[] input = {
-                "22, Rajan Anand, Engineering, 1600000",
-                "23, Swati Patil, Testing, 800000",
-                "27, Vijay Chawda, Engineering, 800000",
-                "29, Basant Mahapatra, Engineering, 600000",
-                "32, Ajay Patel, Testing, 350000",
-                "34, Swaraj Birla, Testing, 350000"
-        };
-        List<Employee> employeeList = prepareList(input);
+        List<String> stringList = null;
+        try {
+            stringList = FileHandling.readFileData("/data/EmployeeData.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        List<Employee> employeeList = prepareList(stringList);
         Map<String, List<Employee>> employeeMap = processData(employeeList);
         Map<String, Employee> stringEmployeeMap = getHighestSalary(employeeMap);
         printEmployeeMap(stringEmployeeMap);
@@ -30,11 +30,11 @@ public class Example05 {
         }
     }
 
-    private static List<Employee> prepareList(String[] input) {
+    private static List<Employee> prepareList(List<String> stringList) {
         List<Employee> list = new ArrayList<>();
-        for (String str : input) {
-            String[] arrayList = str.split(",", 4);
-            Employee employee = new Employee(Integer.parseInt(arrayList[0]), arrayList[1], arrayList[2], Integer.parseInt(arrayList[3].trim()));
+        for (String str : stringList) {
+            String[] columns = str.split(",", 4);
+            Employee employee = new Employee(Integer.parseInt(columns[0]), columns[1], columns[2], Float.parseFloat(columns[3].trim()));
             list.add(employee);
         }
         return list;
