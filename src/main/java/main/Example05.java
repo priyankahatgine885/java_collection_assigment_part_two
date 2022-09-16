@@ -11,16 +11,17 @@ import java.util.Map;
 
 public class Example05 {
     public static void main(String[] args) {
-        List<String> stringList = null;
+        List<String> stringList;
+        Example05 example = new Example05();
         try {
             stringList = FileHandling.readFileData("/data/EmployeeData.txt");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        List<Employee> employeeList = prepareList(stringList);
-        Map<String, List<Employee>> employeeMap = processData(employeeList);
-        Map<String, Employee> stringEmployeeMap = getHighestSalary(employeeMap);
-        printEmployeeMap(stringEmployeeMap);
+        List<Employee> employeeList = Example05.prepareList(stringList);
+        Map<String, List<Employee>> employeeMap = Example05.processData(employeeList);
+        Map<String, Employee> stringEmployeeMap = Example05.getHighestSalary(employeeMap);
+        Example05.printEmployeeMap(stringEmployeeMap);
     }
 
     private static void printEmployeeMap(Map<String, Employee> employeeMap) {

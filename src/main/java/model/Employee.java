@@ -9,8 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 
 public class Employee {
-    private int id;
+    private Integer id;
     private String name;
     private String department;
-    private float salary;
+    private Float salary;
 }

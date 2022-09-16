@@ -31,16 +31,17 @@ Because Ubuntu 12.04 is an out-of-date version (the latest version is 18.04), an
 public class Example01 {
     public static void main(String[] args) {
         List<String> stringList = null;
+        Example01 example = new Example01();
         try {
             stringList = FileHandling.readFileData("/data/SoftwareData.txt");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        List<Software> softWaresList = prepareData(stringList);
-        Map<String, SoftwareStatus> softwareMap = getLatestSoftwareTypeNameVersionMap(softWaresList);
-        printSoftwareMap(softwareMap);
+        List<Software> softWaresList = Example01.prepareData(stringList);
+        Map<String, SoftwareStatus> softwareMap = Example01.getLatestSoftwareTypeNameVersionMap(softWaresList);
+        Example01.printSoftwareMap(softwareMap);
         System.out.println("-----------------------------");
-        List<Software> outDatedSoftware = getOutOfDateVersionIsInstalledOnAtLeastTwoDifferentServers(softWaresList, softwareMap);
+        List<Software> outDatedSoftware = Example01.getOutOfDateVersionIsInstalledOnAtLeastTwoDifferentServers(softWaresList, softwareMap);
         System.out.println("Outdated Software is : ");
         for (Software software : outDatedSoftware) {
             System.out.println(software);

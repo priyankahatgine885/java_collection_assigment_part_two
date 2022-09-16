@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class SoftwareStatus {
     private String latestVersion;
-    private int installedCount;
+    private Integer installedCount;
 
     public String toString() {
         return String.format("%s %s", latestVersion, installedCount);

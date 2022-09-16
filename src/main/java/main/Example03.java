@@ -12,17 +12,18 @@ import java.util.Map;
 public class Example03 {
     public static void main(String[] args) {
         List<String> stringList;
+        Example03 example = new Example03();
         try {
             stringList = FileHandling.readFileData("/data/InputData.txt");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        List<Product> productList = prepareData(stringList);
-        Map<String, String> employeeMap = getLatestLibraryVersionMap(productList);
+        List<Product> productList = Example03.prepareData(stringList);
+        Map<String, String> employeeMap = Example03.getLatestLibraryVersionMap(productList);
         System.out.println("Latest library Version is : ");
-        printProductMap(employeeMap);
+        Example03.printProductMap(employeeMap);
         System.out.println("-----------------------------");
-        List<Product> outDatedLibraryProducts = getOutdatedLibraryProducts(productList, employeeMap);
+        List<Product> outDatedLibraryProducts = Example03.getOutdatedLibraryProducts(productList, employeeMap);
         System.out.println("OutDated library Version is : ");
         for (Product productName : outDatedLibraryProducts) {
             System.out.println(productName);

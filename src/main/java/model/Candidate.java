@@ -8,8 +8,8 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class Candidate {
-    int candidate_id;
-    String candidate_name;
-    String constituency;
-    long votes;
+    private Integer candidate_id;
+    private String candidate_name;
+    private String constituency;
+    private Integer votes;
 }

@@ -11,16 +11,17 @@ import java.util.Map;
 
 public class Example06 {
     public static void main(String[] args) {
+        Example06 example = new Example06();
         List<String> stringList = null;
         try {
             stringList = FileHandling.readFileData("/data/CandidateData.txt");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        List<Candidate> candidateList = prepareList(stringList);
-        Map<String, List<Candidate>> candidateMap = processData(candidateList);
-        Map<String, Float> stringFloatMap = getMaximumVote(candidateMap);
-        printEmployeeMap(stringFloatMap);
+        List<Candidate> candidateList = Example06.prepareList(stringList);
+        Map<String, List<Candidate>> candidateMap = Example06.processData(candidateList);
+        Map<String, Float> stringFloatMap = Example06.getMaximumVote(candidateMap);
+        Example06.printEmployeeMap(stringFloatMap);
     }
 
     public static List<Candidate> prepareList(List<String> stringList) {

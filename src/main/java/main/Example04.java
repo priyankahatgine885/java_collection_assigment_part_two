@@ -12,14 +12,15 @@ import java.util.Map;
 public class Example04 {
     public static void main(String[] args) {
         List<String> stringList;
+        Example04 example = new Example04();
         try {
             stringList = FileHandling.readFileData("/data/StudentData.txt");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Iterable<Student> students = prepareData(stringList);
-        Map<Integer, Integer> studentMap = processData(students);
-        printStudentMap(studentMap);
+        Iterable<Student> students = Example04.prepareData(stringList);
+        Map<Integer, Integer> studentMap = Example04.processData(students);
+        Example04.printStudentMap(studentMap);
     }
 
     private static Iterable<Student> prepareData(List<String> stringList) {
