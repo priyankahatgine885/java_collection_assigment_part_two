@@ -1,8 +1,8 @@
 package com.cognologix.collection.main;
 
-import model.Software;
-import model.SoftwareStatus;
-import utils.FileHandling;
+import com.cognologix.collection.model.Software;
+import com.cognologix.collection.model.SoftwareStatus;
+import com.cognologix.collection.utils.FileHandling;
 
 import java.io.IOException;
 import java.util.ArrayList;

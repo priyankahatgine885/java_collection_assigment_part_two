@@ -1,4 +1,4 @@
-package model;
+package com.cognologix.collection.model;
 
 import lombok.*;
 

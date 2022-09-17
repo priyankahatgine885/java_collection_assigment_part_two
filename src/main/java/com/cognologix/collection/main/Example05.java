@@ -1,7 +1,7 @@
-package main;
+package com.cognologix.collection.main;
 
-import model.Employee;
-import utils.FileHandling;
+import com.cognologix.collection.model.Employee;
+import com.cognologix.collection.utils.FileHandling;
 
 import java.io.IOException;
 import java.util.ArrayList;

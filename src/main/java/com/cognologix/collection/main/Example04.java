@@ -1,7 +1,8 @@
 package com.cognologix.collection.main;
 
-import model.Student;
-import utils.FileHandling;
+
+import com.cognologix.collection.model.Student;
+import com.cognologix.collection.utils.FileHandling;
 
 import java.io.IOException;
 import java.util.ArrayList;

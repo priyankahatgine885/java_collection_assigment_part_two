@@ -1,7 +1,8 @@
 package com.cognologix.collection.main;
 
-import model.Product;
-import utils.FileHandling;
+
+import com.cognologix.collection.model.Product;
+import com.cognologix.collection.utils.FileHandling;
 
 import java.io.IOException;
 import java.util.ArrayList;

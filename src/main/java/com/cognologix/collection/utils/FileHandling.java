@@ -1,4 +1,4 @@
-package utils;
+package com.cognologix.collection.utils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
