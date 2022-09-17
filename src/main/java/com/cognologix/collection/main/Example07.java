@@ -1,4 +1,4 @@
-package main;
+package com.cognologix.collection.main;
 
 public class Example07 {
     public static void main(String[] args) {

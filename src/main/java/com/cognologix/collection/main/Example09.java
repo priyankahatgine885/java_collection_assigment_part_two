@@ -1,4 +1,4 @@
-package main;
+package com.cognologix.collection.main;
 
 import java.util.ArrayList;
 import java.util.Collections;

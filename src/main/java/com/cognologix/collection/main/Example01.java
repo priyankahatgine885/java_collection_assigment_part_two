@@ -1,4 +1,4 @@
-package main;
+package com.cognologix.collection.main;
 
 import model.Software;
 import model.SoftwareStatus;

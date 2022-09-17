@@ -1,4 +1,4 @@
-package main;
+package com.cognologix.collection.main;
 
 import model.Candidate;
 import utils.FileHandling;
