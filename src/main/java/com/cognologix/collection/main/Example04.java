@@ -13,7 +13,6 @@ import java.util.Map;
 public class Example04 {
     public static void main(String[] args) {
         List<String> stringList;
-        Example04 example = new Example04();
         try {
             stringList = FileHandling.readFileData("/data/StudentData.txt");
         } catch (IOException e) {
@@ -40,7 +39,7 @@ public class Example04 {
     private static Map<Integer, Integer> processData(Iterable<Student> students) {
         Map<Integer, Integer> studentMap = new HashMap<>();
         int lowestId = Integer.MAX_VALUE;
-        int averageMark;
+        int averageMark = 0;
         int sum = 0;
         int count = 0;
         for (Student student : students) {
@@ -51,7 +50,9 @@ public class Example04 {
                 ++count;
             }
         }
-        averageMark = sum / count;
+        if (count != 0) {
+            averageMark = sum / count;
+        }
         studentMap.put(lowestId, averageMark);
         return studentMap;
     }

@@ -2,28 +2,27 @@ package com.cognologix.collection.main;
 
 public class Example07 {
     public static void main(String[] args) {
-        Example07 example = new Example07();
         int[] firstArray = {1, 2, 3,};
         int[] secondArray = {1, 2, 3, 4, 5};
         if (Example07.isEqual(firstArray, secondArray)) {
             System.out.println("First array is equal to Second array ");
-        } else if (Example07.isSublist(firstArray, secondArray)) {
-            System.out.println("First array is a sublist of Second array ");
-        } else if (Example07.isSuperlist(firstArray, secondArray)) {
-            System.out.println("First array is a superlist of Second array ");
+        } else if (Example07.isSubSet(firstArray, secondArray)) {
+            System.out.println("First array is a subset of Second array ");
+        } else if (Example07.isSuperSet(firstArray, secondArray)) {
+            System.out.println("First array is a superset of Second array ");
         } else {
-            System.out.println("First array is not a superlist of, sublist of or equal to Second array\n");
+            System.out.println("First array is not a superset of, subset of or not equal to Second array \n");
         }
     }
 
-    private static boolean isSublist(int[] firstArray, int[] secArray) {
+    private static boolean isSubSet(int[] firstArray, int[] secArray) {
         int j;
         if (firstArray.length > secArray.length) {
             return false;
         } else {
-            for (int i = 0; i < firstArray.length; i++) {
+            for (int k : firstArray) {
                 for (j = 0; j < secArray.length; j++) {
-                    if (firstArray[i] == secArray[j])
+                    if (k == secArray[j])
                         break;
                 }
                 if (j == secArray.length)
@@ -33,14 +32,14 @@ public class Example07 {
         return true;
     }
 
-    private static boolean isSuperlist(int[] firstArray, int[] secArray) {
+    private static boolean isSuperSet(int[] firstArray, int[] secArray) {
         int j;
         if (firstArray.length < secArray.length) {
             return false;
         } else {
-            for (int i = 0; i < secArray.length; i++) {
+            for (int k : secArray) {
                 for (j = 0; j < firstArray.length; j++) {
-                    if (firstArray[j] == secArray[i])
+                    if (firstArray[j] == k)
                         break;
                 }
                 if (j == secArray.length)
@@ -55,9 +54,9 @@ public class Example07 {
             return false;
         } else {
             int j;
-            for (int i = 0; i < firstArray.length; i++) {
+            for (int k : firstArray) {
                 for (j = 0; j < secArray.length; j++) {
-                    if (secArray[j] == firstArray[i])
+                    if (secArray[j] == k)
                         break;
                 }
                 if (j == firstArray.length)

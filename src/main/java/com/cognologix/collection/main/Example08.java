@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class Example08 {
     public static void main(String[] args) {
-        Example08 example = new Example08();
+
         final String givenWord = "Machine";
         boolean result = Example08.isIsogram(givenWord);
         if (result) {
@@ -22,9 +22,6 @@ public class Example08 {
         for (char ch : arr) {
             set.add(ch);
         }
-        if (set.size() == word.length())
-            return true;
-        else
-            return false;
+        return (set.size() == word.length());
     }
 }

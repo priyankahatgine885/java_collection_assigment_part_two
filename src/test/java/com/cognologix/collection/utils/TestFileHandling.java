@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 
-public class TestFileHandling {
+class TestFileHandling {
 
     @Test
-    public void testReadFileData() {
-        List<String> stringList = null;
+    void testReadFileData() {
+        List<String> stringList;
         try {
             stringList = FileHandling.readFileData("/data/SoftwareData.txt");
             Assertions.assertEquals(6, stringList.size());

@@ -7,10 +7,12 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Employee {
     private Integer id;
+
     private String name;
+
     private String department;
+
     private Float salary;
 }

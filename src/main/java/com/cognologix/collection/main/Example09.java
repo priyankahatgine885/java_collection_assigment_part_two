@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Example09 {
     public static void main(String[] args) {
-        Example09 example = new Example09();
         final String stringFirst = "listen";
         final String stringSecond = "enlists";
         if (Example09.isAnagram(stringFirst, stringSecond)) {
@@ -36,9 +35,6 @@ public class Example09 {
         Collections.sort(list1);
         Collections.sort(list2);
 
-        if (list1.equals(list2))
-            return true;
-        else
-            return false;
+        return list1.equals(list2);
     }
 }

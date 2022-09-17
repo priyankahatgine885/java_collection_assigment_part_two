@@ -8,7 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
 public class FileHandling {
+
+    //Utility class private constructor
+    private FileHandling() {
+    }
 
     public static List<String> readFileData(String filePath) throws IOException {
         List<String> stringList = new ArrayList<>();

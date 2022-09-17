@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class Example06 {
     public static void main(String[] args) {
-        Example06 example = new Example06();
-        List<String> stringList = null;
+
+        List<String> stringList;
         try {
             stringList = FileHandling.readFileData("/data/CandidateData.txt");
         } catch (IOException e) {
@@ -37,8 +37,7 @@ public class Example06 {
 
     public static Map<String, List<Candidate>> processData(List<Candidate> candidateList) {
         Map<String, List<Candidate>> candidateMap = new HashMap<>();
-        for (int i = 0; i < candidateList.size(); ++i) {
-            Candidate candidate = candidateList.get(i);
+        for (Candidate candidate : candidateList) {
             String constituency = candidate.getConstituency();
             if (candidateMap.containsKey(constituency)) {
                 List<Candidate> empList = candidateMap.get(constituency);
@@ -69,9 +68,9 @@ public class Example06 {
     }
 
     public static void printEmployeeMap(Map<String, Float> map) {
-        for (String constituency : map.keySet()) {
-            Float vote = map.get(constituency);
-            System.out.println("Key: " + constituency + " " + "Value: " + vote);
+        for (Map.Entry<String, Float> entry : map.entrySet()) {
+            System.out.println("Key: " + entry.getKey() + " " + "Value: " + entry.getValue());
         }
     }
+
 }

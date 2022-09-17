@@ -12,7 +12,7 @@ import java.util.Map;
 public class Example05 {
     public static void main(String[] args) {
         List<String> stringList;
-        Example05 example = new Example05();
+        
         try {
             stringList = FileHandling.readFileData("/data/EmployeeData.txt");
         } catch (IOException e) {

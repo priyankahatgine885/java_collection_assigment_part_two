@@ -30,8 +30,7 @@ Because Ubuntu 12.04 is an out-of-date version (the latest version is 18.04), an
  */
 public class Example01 {
     public static void main(String[] args) {
-        List<String> stringList = null;
-        Example01 example = new Example01();
+        List<String> stringList;
         try {
             stringList = FileHandling.readFileData("/data/SoftwareData.txt");
         } catch (IOException e) {
@@ -67,9 +66,9 @@ public class Example01 {
             String currentVersion = softWare.getVersionNumber();
             if (softwareMap.containsKey(softWareTypename)) {
                 SoftwareStatus softwareStatus = softwareMap.get(softWareTypename);
-                int SoftwareCount = softwareStatus.getInstalledCount();
-                SoftwareCount++;
-                softwareStatus.setInstalledCount(SoftwareCount);
+                int softwareCount = softwareStatus.getInstalledCount();
+                softwareCount++;
+                softwareStatus.setInstalledCount(softwareCount);
                 String latestVersion = softwareStatus.getLatestVersion();
                 if (currentVersion.compareTo(latestVersion) > 0) {
                     latestVersion = currentVersion;
@@ -92,10 +91,8 @@ public class Example01 {
             SoftwareStatus softwareStatus = latestSoftwareVersion.get(softwareTypeName);
             String softwareStatusLatestVersion = softwareStatus.getLatestVersion();
             int softwareCount = softwareStatus.getInstalledCount();
-            if (softwareCount > 2) {
-                if (currentVersion.compareTo(softwareStatusLatestVersion) < 0) {
-                    softWareList.add(softWare);
-                }
+            if (softwareCount > 2 && currentVersion.compareTo(softwareStatusLatestVersion) < 0) {
+                softWareList.add(softWare);
             }
         }
         return softWareList;

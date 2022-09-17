@@ -13,7 +13,6 @@ import java.util.Map;
 public class Example03 {
     public static void main(String[] args) {
         List<String> stringList;
-        Example03 example = new Example03();
         try {
             stringList = FileHandling.readFileData("/data/InputData.txt");
         } catch (IOException e) {
