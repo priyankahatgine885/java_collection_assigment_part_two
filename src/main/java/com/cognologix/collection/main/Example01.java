@@ -32,22 +32,25 @@ public class Example01 {
     public static void main(String[] args) {
         List<String> stringList;
         try {
-            stringList = FileHandling.readFileData("/data/SoftwareData.txt");
+            Example01 example01 = new Example01();
+            
+            stringList = FileHandling.readFileData("/data/softwareData.txt");
+            List<Software> softWaresList = example01.prepareData(stringList);
+            Map<String, SoftwareStatus> softwareMap = example01.getLatestSoftwareTypeNameVersionMap(softWaresList);
+            example01.printSoftwareMap(softwareMap);
+            System.out.println("-----------------------------");
+            List<Software> outDatedSoftware = example01.getOutOfDateVersionIsInstalledOnAtLeastTwoDifferentServers(softWaresList, softwareMap);
+            System.out.println("Outdated Software is : ");
+            for (Software software : outDatedSoftware) {
+                System.out.println(software);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        List<Software> softWaresList = Example01.prepareData(stringList);
-        Map<String, SoftwareStatus> softwareMap = Example01.getLatestSoftwareTypeNameVersionMap(softWaresList);
-        Example01.printSoftwareMap(softwareMap);
-        System.out.println("-----------------------------");
-        List<Software> outDatedSoftware = Example01.getOutOfDateVersionIsInstalledOnAtLeastTwoDifferentServers(softWaresList, softwareMap);
-        System.out.println("Outdated Software is : ");
-        for (Software software : outDatedSoftware) {
-            System.out.println(software);
-        }
+
     }
 
-    private static List<Software> prepareData(List<String> stringList) {
+    private List<Software> prepareData(List<String> stringList) {
         List<Software> softWares = new ArrayList<>();
         for (String str : stringList) {
             if (!str.isEmpty()) {
@@ -59,7 +62,7 @@ public class Example01 {
         return softWares;
     }
 
-    private static Map<String, SoftwareStatus> getLatestSoftwareTypeNameVersionMap(Iterable<Software> softWares) {
+    private Map<String, SoftwareStatus> getLatestSoftwareTypeNameVersionMap(Iterable<Software> softWares) {
         Map<String, SoftwareStatus> softwareMap = new HashMap<>();
         for (Software softWare : softWares) {
             String softWareTypename = softWare.getSoftwareTypeName();
@@ -83,7 +86,7 @@ public class Example01 {
         return softwareMap;
     }
 
-    private static List<Software> getOutOfDateVersionIsInstalledOnAtLeastTwoDifferentServers(Iterable<Software> softWares, Map<String, SoftwareStatus> latestSoftwareVersion) {
+    private List<Software> getOutOfDateVersionIsInstalledOnAtLeastTwoDifferentServers(Iterable<Software> softWares, Map<String, SoftwareStatus> latestSoftwareVersion) {
         List<Software> softWareList = new ArrayList<>();
         for (Software softWare : softWares) {
             String softwareTypeName = softWare.getSoftwareTypeName();
@@ -98,7 +101,7 @@ public class Example01 {
         return softWareList;
     }
 
-    public static void printSoftwareMap(Map<String, SoftwareStatus> softwareMap) {
+    public void printSoftwareMap(Map<String, SoftwareStatus> softwareMap) {
         for (Map.Entry<String, SoftwareStatus> entry : softwareMap.entrySet()) {
             String key = entry.getKey();
             SoftwareStatus version = entry.getValue();

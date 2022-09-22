@@ -5,9 +5,9 @@ import java.util.Set;
 
 public class Example08 {
     public static void main(String[] args) {
-
+        Example08 example08 = new Example08();
         final String givenWord = "Machine";
-        boolean result = Example08.isIsogram(givenWord);
+        boolean result = example08.isIsogram(givenWord);
         if (result) {
             System.out.println(givenWord + " is an isogram");
         } else {
@@ -15,7 +15,7 @@ public class Example08 {
         }
     }
 
-    private static boolean isIsogram(String word) {
+    private boolean isIsogram(String word) {
         Set<Character> set = new HashSet<>();
         word = word.toLowerCase();
         char[] arr = word.toCharArray();

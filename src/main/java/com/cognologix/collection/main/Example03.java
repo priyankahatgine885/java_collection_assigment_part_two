@@ -12,25 +12,25 @@ import java.util.Map;
 
 public class Example03 {
     public static void main(String[] args) {
-        List<String> stringList;
         try {
-            stringList = FileHandling.readFileData("/data/InputData.txt");
+            Example03 example03 = new Example03();
+            List<String> stringList = FileHandling.readFileData("/data/inputData.txt");
+            List<Product> productList = example03.prepareData(stringList);
+            Map<String, String> employeeMap = example03.getLatestLibraryVersionMap(productList);
+            System.out.println("Latest library Version is : ");
+            example03.printProductMap(employeeMap);
+            System.out.println("-----------------------------");
+            List<Product> outDatedLibraryProducts = example03.getOutdatedLibraryProducts(productList, employeeMap);
+            System.out.println("OutDated library Version is : ");
+            for (Product productName : outDatedLibraryProducts) {
+                System.out.println(productName);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        List<Product> productList = Example03.prepareData(stringList);
-        Map<String, String> employeeMap = Example03.getLatestLibraryVersionMap(productList);
-        System.out.println("Latest library Version is : ");
-        Example03.printProductMap(employeeMap);
-        System.out.println("-----------------------------");
-        List<Product> outDatedLibraryProducts = Example03.getOutdatedLibraryProducts(productList, employeeMap);
-        System.out.println("OutDated library Version is : ");
-        for (Product productName : outDatedLibraryProducts) {
-            System.out.println(productName);
-        }
     }
 
-    private static List<Product> prepareData(List<String> stringList) {
+    private List<Product> prepareData(List<String> stringList) {
         List<Product> products = new ArrayList<>();
         for (String str : stringList) {
             if (!str.isEmpty()) {
@@ -42,7 +42,7 @@ public class Example03 {
         return products;
     }
 
-    private static Map<String, String> getLatestLibraryVersionMap(Iterable<Product> products) {
+    private Map<String, String> getLatestLibraryVersionMap(Iterable<Product> products) {
         Map<String, String> productMap = new HashMap<>();
         for (Product product : products) {
             String library = product.getLibraryName();
@@ -58,7 +58,7 @@ public class Example03 {
         return productMap;
     }
 
-    private static List<Product> getOutdatedLibraryProducts(Iterable<Product> products, Map<String, String> latestLibraryVersionMap) {
+    private List<Product> getOutdatedLibraryProducts(Iterable<Product> products, Map<String, String> latestLibraryVersionMap) {
         List<Product> list = new ArrayList<>();
         for (Product product : products) {
             String library = product.getLibraryName();
@@ -71,7 +71,7 @@ public class Example03 {
         return list;
     }
 
-    public static void printProductMap(Map<String, String> productMap) {
+    public void printProductMap(Map<String, String> productMap) {
         for (Map.Entry<String, String> entry : productMap.entrySet()) {
             String key = entry.getKey();
             String product = entry.getValue();

@@ -12,18 +12,18 @@ import java.util.Map;
 
 public class Example04 {
     public static void main(String[] args) {
-        List<String> stringList;
         try {
-            stringList = FileHandling.readFileData("/data/StudentData.txt");
+            Example04 example04 = new Example04();
+            List<String> stringList = FileHandling.readFileData("/data/studentData.txt");
+            Iterable<Student> students = example04.prepareData(stringList);
+            Map<Integer, Integer> studentMap = example04.processData(students);
+            example04.printStudentMap(studentMap);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Iterable<Student> students = Example04.prepareData(stringList);
-        Map<Integer, Integer> studentMap = Example04.processData(students);
-        Example04.printStudentMap(studentMap);
     }
 
-    private static Iterable<Student> prepareData(List<String> stringList) {
+    private Iterable<Student> prepareData(List<String> stringList) {
         List<Student> students = new ArrayList<>();
         for (String str : stringList) {
             if (!str.isEmpty()) {
@@ -36,7 +36,7 @@ public class Example04 {
     }
 
 
-    private static Map<Integer, Integer> processData(Iterable<Student> students) {
+    private Map<Integer, Integer> processData(Iterable<Student> students) {
         Map<Integer, Integer> studentMap = new HashMap<>();
         int lowestId = Integer.MAX_VALUE;
         int averageMark = 0;
@@ -57,7 +57,7 @@ public class Example04 {
         return studentMap;
     }
 
-    public static void printStudentMap(Map<Integer, Integer> studentMap) {
+    public void printStudentMap(Map<Integer, Integer> studentMap) {
         for (Map.Entry<Integer, Integer> entry : studentMap.entrySet()) {
             Integer key = entry.getKey();
             Integer students = entry.getValue();

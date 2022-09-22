@@ -13,6 +13,6 @@ public class Candidate {
     private String candidate_name;
 
     private String constituency;
-    
+
     private Integer votes;
 }

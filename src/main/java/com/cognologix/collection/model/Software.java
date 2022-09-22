@@ -8,11 +8,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Software {
-    private  String serverName;
+    private String serverName;
+
     private String softwareType;
+
     private String softwareTypeName;
+
     private String versionNumber;
-    public String toString(){
+
+    @Override
+    public String toString() {
         return String.format("%s %s %s %s", serverName, softwareType, softwareTypeName, versionNumber);
     }
 

@@ -6,16 +6,17 @@ import java.util.List;
 
 public class Example09 {
     public static void main(String[] args) {
+        Example09 example09 = new Example09();
         final String stringFirst = "listen";
         final String stringSecond = "enlists";
-        if (Example09.isAnagram(stringFirst, stringSecond)) {
+        if (example09.isAnagram(stringFirst, stringSecond)) {
             System.out.println(stringFirst + " and " + stringSecond + " are Anagrams");
         } else {
             System.out.println(stringFirst + " and " + stringSecond + " are NOT Anagrams");
         }
     }
 
-    private static boolean isAnagram(String stringFirst, String stringSecond) {
+    private boolean isAnagram(String stringFirst, String stringSecond) {
         stringFirst = stringFirst.toLowerCase();
         stringSecond = stringSecond.toLowerCase();
 

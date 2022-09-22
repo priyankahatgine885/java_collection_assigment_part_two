@@ -1,6 +1,5 @@
 package com.cognologix.collection.main;
 
-
 import com.cognologix.collection.model.Candidate;
 import com.cognologix.collection.utils.FileHandling;
 
@@ -12,20 +11,19 @@ import java.util.Map;
 
 public class Example06 {
     public static void main(String[] args) {
-
-        List<String> stringList;
         try {
-            stringList = FileHandling.readFileData("/data/CandidateData.txt");
+            Example06 example06 = new Example06();
+            List<String> stringList = FileHandling.readFileData("/data/candidateData.txt");
+            List<Candidate> candidateList = example06.prepareList(stringList);
+            Map<String, List<Candidate>> candidateMap = example06.processData(candidateList);
+            Map<String, Float> stringFloatMap = example06.getMaximumVote(candidateMap);
+            example06.printEmployeeMap(stringFloatMap);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        List<Candidate> candidateList = Example06.prepareList(stringList);
-        Map<String, List<Candidate>> candidateMap = Example06.processData(candidateList);
-        Map<String, Float> stringFloatMap = Example06.getMaximumVote(candidateMap);
-        Example06.printEmployeeMap(stringFloatMap);
     }
 
-    public static List<Candidate> prepareList(List<String> stringList) {
+    public List<Candidate> prepareList(List<String> stringList) {
         List<Candidate> list = new ArrayList<>();
         for (String str : stringList) {
             String[] arrayList = str.split(",", 4);
@@ -35,7 +33,7 @@ public class Example06 {
         return list;
     }
 
-    public static Map<String, List<Candidate>> processData(List<Candidate> candidateList) {
+    public Map<String, List<Candidate>> processData(List<Candidate> candidateList) {
         Map<String, List<Candidate>> candidateMap = new HashMap<>();
         for (Candidate candidate : candidateList) {
             String constituency = candidate.getConstituency();
@@ -51,7 +49,7 @@ public class Example06 {
         return candidateMap;
     }
 
-    private static Map<String, Float> getMaximumVote(Map<String, List<Candidate>> candidateMap) {
+    private Map<String, Float> getMaximumVote(Map<String, List<Candidate>> candidateMap) {
         Map<String, Float> stringEmployeeMap = new HashMap<>();
         float maxValue = 0.0f;
         for (Map.Entry<String, List<Candidate>> entry : candidateMap.entrySet()) {
@@ -67,7 +65,7 @@ public class Example06 {
         return stringEmployeeMap;
     }
 
-    public static void printEmployeeMap(Map<String, Float> map) {
+    public void printEmployeeMap(Map<String, Float> map) {
         for (Map.Entry<String, Float> entry : map.entrySet()) {
             System.out.println("Key: " + entry.getKey() + " " + "Value: " + entry.getValue());
         }

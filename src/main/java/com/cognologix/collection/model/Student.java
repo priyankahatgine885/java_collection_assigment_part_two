@@ -2,15 +2,19 @@ package com.cognologix.collection.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
 @AllArgsConstructor
 @Getter
 public class Student {
-        private int id;
-        private String subject;
-        private int mark;
+    private int id;
 
-        public String toString() {
-            return String.format("%s %s %s", id, subject, mark);
-        }
+    private String subject;
+
+    private int mark;
+
+    @Override
+    public String toString() {
+        return String.format("%s %s %s", id, subject, mark);
+    }
 
 }

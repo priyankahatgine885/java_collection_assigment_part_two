@@ -10,16 +10,10 @@ import java.util.Objects;
 
 
 public class FileHandling {
-
-    //Utility class private constructor
-    private FileHandling() {
-    }
-
     public static List<String> readFileData(String filePath) throws IOException {
         List<String> stringList = new ArrayList<>();
         try (BufferedReader lineReader = new BufferedReader(new FileReader(
-                Paths.get(Objects.requireNonNull(FileHandling.class
-                        .getResource(filePath)).getPath()).toFile()
+                Paths.get(FileHandling.class.getResource(filePath).getPath()).toFile()
         ))) {
             String lineText;
             while (!Objects.isNull(lineText = lineReader.readLine()) && lineText.length() != 0) {
@@ -28,6 +22,4 @@ public class FileHandling {
         }
         return stringList;
     }
-
-
 }
